@@ -2,6 +2,8 @@ package lab2;
 
 public class SelectionSort 
 {
+	int countMove = 0;
+	int countCompare = 0;
 	public void interative(int[] array)
 	{
 		for(int i = 0; i < array.length - 1; i++)
@@ -16,7 +18,10 @@ public class SelectionSort
 		int pos = index;
 		for(int i = index + 1; i < array.length; i++)
 			if(array[i] < array[pos])
+			{
+				countCompare++;
 				pos = i;
+			}
 		return pos;
 	}
 
@@ -26,6 +31,7 @@ public class SelectionSort
 		temp = array[pos1];
 		array[pos1] = array[pos2];
 		array[pos2] = temp;
+		countMove += 2;
 	}
 	
 	public void recursive(int[] array, int first, int last)
