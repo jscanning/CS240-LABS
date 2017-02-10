@@ -1,9 +1,11 @@
 package lab2;
 
-import java.util.Random;
 
 public class QuickSort 
 {
+	
+	int countMove = 0, countCompare = 0;
+	
 	public void recursiveQuickSort(int[] array, int first, int last)
 	{
 		if(first < last)
@@ -21,8 +23,10 @@ public class QuickSort
 		int index = (first-1);
 		for(int j = first; j < last; j++)
 		{
+			countCompare++;
 			if(array[j] <= pivotValue)
 			{
+				countCompare++;
 				index++;
 				swap(array, index, j);
 			}
@@ -34,6 +38,7 @@ public class QuickSort
 	
 	public void iterativeQuickSort(int[] array, int first, int last)
 	{
+		
 		int stack[] = new int[last - first + 1];
 		int top = -1;
 		stack[++top] = first;
@@ -41,6 +46,7 @@ public class QuickSort
 		
 		while(top >= 0)
 		{
+			countCompare++;
 			last = stack[top--];
 			first = stack[top--];
 			
@@ -48,6 +54,7 @@ public class QuickSort
 			
 			if(pivot - 1 > 1)
 			{
+				countCompare++;
 				stack[++top] = first;
 				stack[++top] = pivot - 1;
 			}
@@ -58,6 +65,8 @@ public class QuickSort
 				stack[++top] = last;
 			}
 		}
+		System.out.println("Move: " + countMove);
+		System.out.println("Compare: " + countCompare);
 	}
 	
 	public void printArray(int array[])
@@ -73,13 +82,14 @@ public class QuickSort
 		temp = array[pos1];
 		array[pos1] = array[pos2];
 		array[pos2] = temp;
+		countMove++;
 	}
 	
 	public static void main(String args[])
 	{
 		QuickSort ob = new QuickSort();
-		Random rand = new Random();
-		int arr[] = {rand.nextInt(1000), rand.nextInt(1000), rand.nextInt(1000), rand.nextInt(1000), rand.nextInt(1000)};
+		arrayGenerator ag = new arrayGenerator();
+		int[] arr = ag.generateArray(10, 1000);
 		ob.printArray(arr);
 		ob.recursiveQuickSort(arr, 0, arr.length-1);
 		ob.printArray(arr);

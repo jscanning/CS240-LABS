@@ -1,7 +1,5 @@
 package lab2;
 
-import java.util.Random;
-
 public class RadixSort 
 {
 	
@@ -9,6 +7,8 @@ public class RadixSort
 	{
 		@SuppressWarnings("unchecked")
 		LinkedQueue<Integer>[] buckets = new LinkedQueue[10];
+		int countMove = 0;
+		int countCompare = 0;
 
 		for(int i = 0; i < buckets.length; i++)
 			buckets[i] = new LinkedQueue<Integer>();
@@ -18,25 +18,43 @@ public class RadixSort
 		
 		while(maxValue / expo > 0)
 		{
-			
+			countCompare++;
 			//for(int b = 0; b < 10; b++)
 				//buckets[b].clear();
 			
 			for(int index = first; index <= last; index++)
 			{
+				countCompare++;
 				int bucket = (array[index] / expo) % 10;
 				
 				buckets[bucket].enqueue(array[index]);
+				countMove++;
 			}
 			
 			expo *= 10;
 			int index = 0;
 			
 			for(LinkedQueue<Integer> bucket : buckets)
+			{
+				countCompare++;
 				while(!bucket.isEmpty())
+				{
 					array[index++] = bucket.dequeue();
+					countMove++;
+				}
+			}
 			
 			printArray(array);
+		}
+		System.out.println("Move: " + countMove);
+		System.out.println("Compare: " + countCompare);
+	}
+	
+	public void recursiveRadixSort(int[] array, int first, int last)
+	{
+		if(first < last)
+		{
+			
 		}
 	}
 
@@ -59,9 +77,10 @@ public class RadixSort
 	public static void main(String args[])
 	{
 		RadixSort ob = new RadixSort();
-		Random rand = new Random();
-		int arr[] = {rand.nextInt(100), rand.nextInt(100), rand.nextInt(100), rand.nextInt(100), rand.nextInt(100), rand.nextInt(100)};
+		arrayGenerator ag = new arrayGenerator();
+		int[] arr = ag.generateArray(1000, 1000);
 		ob.printArray(arr);
 		ob.iterativeRadixSort(arr, 0, arr.length-1);
+		System.out.println();
 	}
 }
