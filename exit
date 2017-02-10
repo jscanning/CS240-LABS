@@ -1,0 +1,47 @@
+[33mcommit e682c3e695083b26c8b3a7bd990b1d6eed5e8199[m
+Author: Jeremy Canning <jscanning@cpp.edu>
+Date:   Fri Feb 10 01:45:06 2017 -0800
+
+    revision7 started adding countMove/Compare to iterative methods, iterative QuickSort needs to be reworked entirely
+
+[33mcommit 13d07987b9fc0e35bd647f7a5aab6e38311726de[m
+Author: Jeremy Canning <jscanning@cpp.edu>
+Date:   Fri Feb 10 00:10:52 2017 -0800
+
+    revision 6: iterative RadixSort complete
+
+[33mcommit 2d37428b3d3a731582fb2c9a5a4b270e4df619c9[m
+Author: Jeremy Canning <jscanning@cpp.edu>
+Date:   Thu Feb 9 21:36:04 2017 -0800
+
+    revision 5: QuickSort
+
+[33mcommit 7af23cde6b5f6d9660601fbaebc967e6b4fc2b94[m
+Author: Jeremy Canning <jscanning@cpp.edu>
+Date:   Wed Feb 8 22:47:07 2017 -0800
+
+    revision 4: ShellSort iterative
+
+[33mcommit d284dd18ac385098b5094fc3f595599c187383ba[m
+Author: Jeremy Canning <jscanning@cpp.edu>
+Date:   Wed Feb 8 21:51:25 2017 -0800
+
+    revision 3: InsertionSort
+
+[33mcommit f67637e1c99402f6ba08930a08ea1b0cb3384b18[m
+Author: Jeremy Canning <jscanning@cpp.edu>
+Date:   Wed Feb 8 21:25:50 2017 -0800
+
+    revision 2: added countMove, countCompare counters to SelectionSort
+
+[33mcommit 86fb569ede4cfacc139aae54d70b3a0e97ec74bd[m
+Author: Jeremy Canning <jscanning@cpp.edu>
+Date:   Wed Feb 8 21:21:51 2017 -0800
+
+    revision 1: SelectionSort complete
+
+[33mcommit bf3d9a5241d6cd6f6e8a9c22b29047186741e277[m
+Author: Jeremy Canning <jscanning@cpp.edu>
+Date:   Wed Feb 8 20:44:45 2017 -0800
+
+    first commit: MergeSort complete

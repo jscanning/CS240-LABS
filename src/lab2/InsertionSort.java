@@ -2,13 +2,20 @@ package lab2;
 
 public class InsertionSort 
 {
-	public void interative(int[] array, int first, int last)
+	int countMove = 0;
+	int countCompare = 0;
+	
+	public void iterative(int[] array, int first, int last)
 	{
 		for(int unsorted = first + 1; unsorted <= last; unsorted++)
 		{
+			countCompare++;
 			int nextToInsert = array[unsorted];
 			insertInOrder(nextToInsert, array, first, unsorted - 1);
 		}
+		printArray(array);
+		System.out.println("M: " + countMove);
+		System.out.println("C: " + countCompare);
 	}
 	
 	public void recursive(int[] array, int first, int last)
@@ -25,9 +32,28 @@ public class InsertionSort
 		int index = end;
 		while((index >= begin) && (anEntry < array[index]))
 		{
+			countCompare++;
+			countMove++;
 			array[index+1] = array[index];
 			index--;
 		}
 		array[index+1] = anEntry;
+		countMove++;
+	}
+	
+	public void printArray(int array[])
+	{
+		for(int i = 0; i < array.length; i++)
+			System.out.print(array[i] + " ");
+		System.out.println();
+	}
+	
+	public static void main(String args[])
+	{
+		arrayGenerator ag = new arrayGenerator();
+		int[] arr = ag.generateArray(1000, 1000);
+		InsertionSort is = new InsertionSort();
+		is.printArray(arr);
+		is.iterative(arr, 0, arr.length - 1);
 	}
 }

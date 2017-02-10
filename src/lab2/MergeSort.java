@@ -2,6 +2,9 @@ package lab2;
 
 public class MergeSort 
 {
+	int countMove = 0;
+	int countCompare = 0;
+	
 	public void iterative(int[] array)
 	{
 		for(int currentSize = 1; currentSize <= array.length; currentSize = 2*currentSize)
@@ -44,11 +47,11 @@ public class MergeSort
 		leftArr = new int[n1];
 		rightArr = new int[n2];
 		
-		for(int i = 0, j = 0; i < n1 && j < n2; i++, j++)
-		{
+		for(int i = 0; i < n1; i++)
 			leftArr[i] = array[left + i];
+		for(int j = 0; j < n2; j++)
 			rightArr[j] = array[mid + 1 + j];
-		}
+		
 		int i = 0;
 		int j = 0;
 		int k = 1;
@@ -87,6 +90,16 @@ public class MergeSort
 		for(int i = 0; i < array.length; i++)
 			System.out.print(array[i] + " ");
 		System.out.println();
+	}
+	
+	public static void main(String args[])
+	{
+		MergeSort ob = new MergeSort();
+		arrayGenerator ag = new arrayGenerator();
+		int[] arr = ag.generateArray(1000, 1000);
+		ob.printArray(arr);
+		ob.iterative(arr);
+		ob.printArray(arr);
 	}
 	
 	
