@@ -91,7 +91,7 @@ public class QuickSort
 		arrayGenerator ag = new arrayGenerator();
 		int[] arr = ag.generateArray(10, 1000);
 		ob.printArray(arr);
-		ob.recursiveQuickSort(arr, 0, arr.length-1);
+		ob.iterativeQuickSort(arr, 0, arr.length-1);
 		ob.printArray(arr);
 	}
 }

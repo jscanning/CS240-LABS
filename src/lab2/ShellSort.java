@@ -2,12 +2,15 @@ package lab2;
 
 public class ShellSort 
 {
+	static int countCompare = 0;
+	static int countMove = 0;
 	
 	public void iterativeShellSort(int[] array)
 	{
 		int gap = getHibbardSeq(array.length/2);
 		while(gap > 1)
 		{
+			countCompare++;
 			insertSort(array, gap);
 			gap = getHibbardSeq(gap-1);
 		}
@@ -26,16 +29,19 @@ public class ShellSort
 	
 	private void insertSort(int[] arr, int gap) 
 	{
-		for(int unsorted = gap; unsorted < arr.length; unsorted += gap)
+		for(int unsorted = gap; unsorted < arr.length; unsorted += gap, countCompare++)
 		{
 			int nextToInsert = arr[unsorted];
 			int index = unsorted - gap;
 			while((index >= 0) && (nextToInsert < arr[index]))
 			{
+				countCompare+=2;
 				arr[index+gap] = arr[index];
+				countMove++;
 				index -= gap;
 			}
 			arr[index+gap] = nextToInsert;
+			countMove++;
 		}
 	}
 
@@ -70,10 +76,11 @@ public class ShellSort
 	public static void main(String args[])
 	{
 		arrayGenerator ag = new arrayGenerator();
-		int[] arr = ag.generateArray(10, 1000);
+		int[] arr = ag.generateArray(1000, 1000);
 		ShellSort sort = new ShellSort();
 		sort.printArray(arr);
-		sort.recursiveShellSort(arr, sort.getHibbardSeq(arr.length/2));
+		sort.iterativeShellSort(arr);
 		sort.printArray(arr);
+		System.out.println("compare: " + countCompare + " Move: " + countMove);
 	}
 }

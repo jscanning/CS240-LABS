@@ -84,7 +84,7 @@ public class MergeSort
 	{
 		MergeSort ob = new MergeSort();
 		arrayGenerator ag = new arrayGenerator();
-		int[] arr = ag.generateArray(10, 1000);
+		int[] arr = ag.generateArray(1000, 1000);
 		ob.printArray(arr);
 		ob.iterativeMergeSort(arr);
 		ob.printArray(arr);

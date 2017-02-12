@@ -83,7 +83,7 @@ public class RadixSort
 	{
 		RadixSort ob = new RadixSort();
 		arrayGenerator ag = new arrayGenerator();
-		int[] arr = ag.generateArray(1000, 1000);
+		int[] arr = ag.generateArray(100, 1000);
 		ob.printArray(arr);
 		ob.iterativeRadixSort(arr, 0, arr.length-1);
 		System.out.println();
