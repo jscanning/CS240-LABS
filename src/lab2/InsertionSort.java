@@ -7,9 +7,8 @@ public class InsertionSort
 	
 	public void iterative(int[] array, int first, int last)
 	{
-		for(int unsorted = first + 1; unsorted <= last; unsorted++)
+		for(int unsorted = first + 1; unsorted <= last; unsorted++, countCompare++)
 		{
-			countCompare++;
 			int nextToInsert = array[unsorted];
 			insertInOrder(nextToInsert, array, first, unsorted - 1);
 		}

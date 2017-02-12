@@ -2,37 +2,78 @@ package lab2;
 
 public class ShellSort 
 {
-	private void incrementalInsertionSort(int[] array, int first, int last, int increment)
+	
+	public void iterativeShellSort(int[] array)
 	{
-		for(int unsorted = first + increment; unsorted < last; unsorted += increment)
+		int gap = getHibbardSeq(array.length/2);
+		while(gap > 1)
 		{
-			int nextToInsert = array[unsorted];
-			int index = unsorted - increment;
-			while((index >= first) && (nextToInsert > array[index]))
-			{
-				array[index + increment] = array[index];
-				index = index - increment;
-			}
-			array[index + increment] = nextToInsert;
+			insertSort(array, gap);
+			gap = getHibbardSeq(gap-1);
 		}
+		insertSort(array, 1);
 	}
 	
-	public void iterativeShellSort(int[] array, int first, int last)
+	public void recursiveShellSort(int[] array, int gap)
+	{
+		if(gap > 1)
+		{
+			recursiveShellSort(array, getHibbardSeq(gap-1));
+			insertSort(array, gap);
+		}
+		insertSort(array, 1);
+	}
+	
+	private void insertSort(int[] arr, int gap) 
+	{
+		for(int unsorted = gap; unsorted < arr.length; unsorted += gap)
+		{
+			int nextToInsert = arr[unsorted];
+			int index = unsorted - gap;
+			while((index >= 0) && (nextToInsert < arr[index]))
+			{
+				arr[index+gap] = arr[index];
+				index -= gap;
+			}
+			arr[index+gap] = nextToInsert;
+		}
+	}
+
+	private int getHibbardSeq(int limit) 
 	{
 		int sequence = 1;
-		while(sequence < last)
+		int k = 1;
+		
+		while(sequence < limit)
 		{
-			for(int begin = first; begin <= first + sequence - 1; begin++)
-			{
-				incrementalInsertionSort(array, begin, last, sequence);
-			}
-			sequence = (2*sequence + 1);
+			k++;
+			sequence = (int)(Math.pow(2, k)-1);
 		}
-		incrementalInsertionSort(array, first, last, 1);
+		
+		if(sequence > limit){
+			--k;
+			return (int)(Math.pow(2, k)- 1);
+		}
+		System.out.println("the gap is " + sequence);
+		return sequence;
+	}
+
+
+	
+	public void printArray(int array[])
+	{
+		for(int i = 0; i < array.length; i++)
+			System.out.print(array[i] + " ");
+		System.out.println();
 	}
 	
-	public void recursiveShellSort(int[] array, int first, int last)
+	public static void main(String args[])
 	{
-		
+		arrayGenerator ag = new arrayGenerator();
+		int[] arr = ag.generateArray(10, 1000);
+		ShellSort sort = new ShellSort();
+		sort.printArray(arr);
+		sort.recursiveShellSort(arr, sort.getHibbardSeq(arr.length/2));
+		sort.printArray(arr);
 	}
 }

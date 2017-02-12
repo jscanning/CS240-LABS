@@ -2,13 +2,13 @@ package lab2;
 
 public class RadixSort 
 {
+	int countCompare = 0;
+	int countMove = 0;
 	
 	public void iterativeRadixSort(int[] array, int first, int last)
 	{
 		@SuppressWarnings("unchecked")
 		LinkedQueue<Integer>[] buckets = new LinkedQueue[10];
-		int countMove = 0;
-		int countCompare = 0;
 
 		for(int i = 0; i < buckets.length; i++)
 			buckets[i] = new LinkedQueue<Integer>();
@@ -22,9 +22,8 @@ public class RadixSort
 			//for(int b = 0; b < 10; b++)
 				//buckets[b].clear();
 			
-			for(int index = first; index <= last; index++)
+			for(int index = first; index <= last; index++, countCompare++)
 			{
-				countCompare++;
 				int bucket = (array[index] / expo) % 10;
 				
 				buckets[bucket].enqueue(array[index]);
@@ -52,6 +51,12 @@ public class RadixSort
 	
 	public void recursiveRadixSort(int[] array, int first, int last)
 	{
+		@SuppressWarnings("unchecked")
+		LinkedQueue<Integer>[] buckets = new LinkedQueue[10];
+
+		for(int i = 0; i < buckets.length; i++)
+			buckets[i] = new LinkedQueue<Integer>();
+		
 		if(first < last)
 		{
 			
