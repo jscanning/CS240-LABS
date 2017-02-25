@@ -4,11 +4,12 @@ public class SelectionSort
 {
 	int countMove = 0;
 	int countCompare = 0;
-	public void iterativeSelectSort(int[] array)
+	
+	
+	public void iterativeSelectSort(int[] array) // "red arrow"
 	{
-		for(int i = 0; i < array.length - 1; i++)
+		for(int i = 0; i < array.length - 1; i++, countCompare++)
 		{	
-			//countCompare++;
 			int indexOfNextMin = smallestIndexFrom(i, array);
 			swap(array, i, indexOfNextMin);
 		}
@@ -16,16 +17,14 @@ public class SelectionSort
 		System.out.println("M: "+ countMove + " C: " + countCompare);
 	}
 	
-	private int smallestIndexFrom(int index, int[] array) 
+	private int smallestIndexFrom(int index, int[] array) // "green arrow" 
 	{
 		int pos = index;
-		for(int i = index + 1; i < array.length; i++){
+		for(int i = index + 1; i < array.length; i++, countCompare++)
+		{
 			countCompare++;
 			if(array[i] < array[pos])
-			{
-				//countCompare++;
 				pos = i;
-			}
 		}
 		return pos;
 	}
@@ -39,13 +38,13 @@ public class SelectionSort
 		countMove += 2;
 	}
 	
-	public void recursive(int[] array, int first, int last)
+	public void recursiveSelectSort(int[] array, int first, int last)
 	{
-		if(first < last)
+		if(first < last) // base case reach end of array
 		{
-			int indexOfNextMin = smallestIndexFrom(first, array);
+			int indexOfNextMin = smallestIndexFrom(first, array); // find next smallest index
 			swap(array, first, indexOfNextMin);
-			recursive(array, first + 1, last);
+			recursiveSelectSort(array, first + 1, last);
 		}
 	}
 	
