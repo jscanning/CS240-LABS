@@ -7,7 +7,7 @@ public class RadixSort
 	int countCompare = 0;
 	int countMove = 0;
 	
-	public void iterativeRadixSort(int[] array, int first, int last)
+	public void iterativeRadixSort(Integer[] integers, int first, int last)
 	{
 		@SuppressWarnings("unchecked")
 		LinkedQueue<Integer>[] buckets = new LinkedQueue[10];
@@ -16,7 +16,7 @@ public class RadixSort
 			buckets[i] = new LinkedQueue<Integer>();
 		
 		int expo = 1;
-		int maxValue = getMaxValue(array);
+		int maxValue = getMaxValue(integers);
 		
 		while(maxValue / expo > 0)
 		{
@@ -26,9 +26,9 @@ public class RadixSort
 			
 			for(int index = first; index <= last; index++, countCompare++)
 			{
-				int bucket = (array[index] / expo) % 10;
+				int bucket = (integers[index] / expo) % 10;
 				
-				buckets[bucket].enqueue(array[index]);
+				buckets[bucket].enqueue(integers[index]);
 				countMove++;
 			}
 			
@@ -40,12 +40,12 @@ public class RadixSort
 				countCompare++;
 				while(!bucket.isEmpty())
 				{
-					array[index++] = bucket.dequeue();
+					integers[index++] = bucket.dequeue();
 					countMove++;
 				}
 			}
 			
-			printArray(array);
+			printArray(integers);
 		}
 		System.out.println("Move: " + countMove);
 		System.out.println("Compare: " + countCompare);
@@ -65,19 +65,19 @@ public class RadixSort
 		}
 	}
 
-	private int getMaxValue(int[] array) 
+	private int getMaxValue(Integer[] integers) 
 	{
 		int max = 0;
-		for(int i = 0; i < array.length; i++)
-			if(array[i] > max)
-				max = array[i];
+		for(int i = 0; i < integers.length; i++)
+			if(integers[i] > max)
+				max = integers[i];
 		return max;
 	}
 
-	public void printArray(int array[])
+	public void printArray(Integer[] integers)
 	{
-		for(int i = 0; i < array.length; i++)
-			System.out.print(array[i] + " ");
+		for(int i = 0; i < integers.length; i++)
+			System.out.print(integers[i] + " ");
 		System.out.println();
 	}
 	

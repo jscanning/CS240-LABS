@@ -15,14 +15,14 @@ public final class ArrayStack<T> implements StackInterface<T>
 	private int topIndex;
 	private boolean initialized = false;
 	private static final int DEFAULT_CAPACITY = 10;
-	private static final int MAX_CAP = 10000; //currently no checkCapacity function
+	private static final int MAX_CAP = 500000; //currently no checkCapacity function
 	
 	public ArrayStack()
 	{
 		this(DEFAULT_CAPACITY);
 	}
 	
-	private ArrayStack(int initCapacity)
+	public ArrayStack(int initCapacity)
 	{	
 		checkCapacity(initCapacity);
 		
@@ -36,15 +36,17 @@ public final class ArrayStack<T> implements StackInterface<T>
 	@Override
 	public void push(T newEntry) 
 	{
-		ensureCapacity(); //unimplemented; would allocate more space for the array if necessary and valid.
+		ensureCapacity(); 
 		checkInitialization();
-		try{
-			stack[topIndex + 1] = newEntry;
-			topIndex++;
-		}catch(ArrayIndexOutOfBoundsException e)
-		{
-			System.out.println("Attempted to add an entry to a full stack.");
-		}
+		stack[topIndex + 1] = newEntry;
+		topIndex++;
+	}
+	
+	// multi-push method for pushing several copies of the same entry onto the stack.
+	public void push(T newEntry, int numOfCopies)
+	{
+		for(int i = numOfCopies; i > 0; i--)
+			push(newEntry);
 	}
 
 	@Override
@@ -116,4 +118,13 @@ public final class ArrayStack<T> implements StackInterface<T>
 			pop();
 	}
 	
+	public int getLength()
+	{
+		return topIndex + 2;
+	}
+	
+	public T[] toArray()
+	{
+		return stack;
+	}
 } // end class ArrayStack
