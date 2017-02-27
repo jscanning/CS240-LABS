@@ -60,12 +60,11 @@ public class Inventory
 	}
 	
 	//initialize ingredient stacks
-	@SuppressWarnings("unchecked")
 	private ArrayStack<Integer>[] initializeStock(ArrayStack<Integer>[] stock)
 	{
 		for(int i = 0; i < stock.length; i++)
 		{
-			stock[i] = new ArrayStack(5000);
+			stock[i] = new ArrayStack<Integer>(1000);
 		}
 		return stock;
 	}
@@ -95,18 +94,20 @@ public class Inventory
 		System.out.println("End of day");
 		lostCustomerTotal += lostCustomerDay;
 		sortStock(stock);
-		//removeExpiredStock(stock);
+		removeExpiredStock(stock);
 		currentDate++;
-		System.out.println("Customers Lost: " + lostCustomerDay);
+		/**System.out.println("Customers Lost: " + lostCustomerDay);
 		System.out.println("Total Sold: "+ (countItemOne+countItemTwo+countItemThree+countItemFour+countItemFive+countItemSix));
-//		System.out.println("Burgers: " + countItemOne);
-//		System.out.println("Cheeseburgers: " + countItemTwo);
-//		System.out.println("Vegan Option: "+countItemThree);
-//		System.out.println("Burgers w/o Onions: " + countItemFour);
-//		System.out.println("Cheesburger no Onion: " + countItemFive);
-//		System.out.println("Burger w/o Tomato: " + countItemSix);
-		System.out.println("Total Cheese Wasted: " + wasteCheese);
+		System.out.println("Burgers sold: " + countItemOne);
+		System.out.println("Cheeseburgers sold: " + countItemTwo);
+		System.out.println("Vegan Options sold: "+countItemThree);
+		System.out.println("Burgers w/o Onion sold: " + countItemFour);
+		System.out.println("Cheesburgers w/o Onion sold: " + countItemFive);
+		System.out.println("Burgers w/o Tomato sold: " + countItemSix);
+		System.out.println("Wasted Food Totals: Cheese: " + wasteCheese + " Buns: " + wasteBun + " Patties: " + wastePatty);
+		System.out.println("Lettuce: " + wasteLettuce + " Tomato: " + wasteTomato + " Onion: " + wasteOnion);
 		System.out.println("Total Customers Lost: " + lostCustomerTotal);
+		*/
 	}
 	
 	public CircularLinkedQueue<Integer> customerArrival(int numberOfCustomers, int limit)
@@ -161,7 +162,6 @@ public class Inventory
 				customerQueue.dequeue();
 				lostCustomerDay++;
 			}
-			
 		}
 	}
 	
@@ -244,38 +244,32 @@ public class Inventory
 			default:
 				break;
 			}
-			try{
-			stock[i].push(expireDate, shipmentSize);
-			}catch(IllegalStateException|ArrayIndexOutOfBoundsException a){
+			//try{
+			for(int j = 1; j <= shipmentSize; j++)
+				stock[i].push(expireDate);
+			/**}catch(IllegalStateException|ArrayIndexOutOfBoundsException a){
 				sortStock(stock);
 				removeExpiredStock(stock);
-			}
+			}*/
 		}
 	}
 	
 	public void sortStock(ArrayStack<Integer>[] stock)
 	{
-		RadixSort sorter = new RadixSort();
+		QuickSort sorter = new QuickSort();
 		
 		for(int i = 0; i < stock.length; i++)
 		{
 			if(!stock[i].isEmpty())
 			{
-				Integer tempArray[] = new Integer[(Integer) stock[i].getLength()];
+				Integer[] tempArray = new Integer[stock[i].getLength()];
 				for(int x = 0; x < tempArray.length; x++)
 					tempArray[x] = stock[i].pop();
-				sorter.iterativeRadixSort(tempArray, 0, tempArray.length - 1);
+				sorter.printArray(tempArray);
+				sorter.recursiveQuickSort(tempArray, 0, tempArray.length - 1);
+			//	System.out.println(tempArray);
 				for(int j = 0; j < tempArray.length; j++)
 					stock[i].push(tempArray[j]);
-				boolean expired = true;
-				do{
-					if(stock[i].peek().intValue() < currentDate){
-						stock[i].pop();
-						incrementWaste(i);
-					}
-					else
-						expired = false;
-				}while(expired && !stock[i].isEmpty());
 			}
 		}
 	}
@@ -308,10 +302,15 @@ public class Inventory
 	{
 		for(int i = 0; i < stock.length; i++)
 		{
-			while(!(stock[i].isEmpty()) && stock[i].peek() < currentDate)
-			{
-				stock[i].pop();
-				incrementWaste(i);
+			try{
+				while((stock[i].peek().intValue() < currentDate) && !stock[i].isEmpty())
+				{
+					System.out.println("Removing Expired Product");
+					stock[i].pop();
+					incrementWaste(i);
+				}
+			}catch(EmptyStackException e){
+				System.out.println("Empty Stack");
 			}
 		}
 	}
@@ -322,10 +321,10 @@ public class Inventory
 		@SuppressWarnings("unchecked")
 		ArrayStack<Integer>[] stock = new ArrayStack[6];
 		inv.initialize(stock);
-		while(inv.currentDate <= 330){
+		//while(inv.currentDate <= 330){
 			inv.businessDay(stock);
 			System.out.println();
-		}
+		//}
 	}
 	
 }

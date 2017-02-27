@@ -65,8 +65,8 @@ public class QuickSort
 				stack[++top] = last;
 			}
 		}
-		System.out.println("Move: " + countMove);
-		System.out.println("Compare: " + countCompare);
+	//	System.out.println("Move: " + countMove);
+		//System.out.println("Compare: " + countCompare);
 	}
 	
 	public void printArray(int array[])
@@ -89,8 +89,8 @@ public class QuickSort
 	{
 		QuickSort ob = new QuickSort();
 		arrayGenerator ag = new arrayGenerator();
-		//int[] arr = ag.generateArray(30, 30);
-		int[] arr = new int[]{-1, 4, 0,1,-2};
+		int[] arr = ag.generateArray(30, 30);
+		//int[] arr = new int[]{-1, 4, 0,1,-2};
 		ob.printArray(arr);
 		ob.recursiveQuickSort(arr, 0, arr.length-1);
 		ob.printArray(arr);
