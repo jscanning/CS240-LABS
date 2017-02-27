@@ -43,7 +43,7 @@ public class RadixSort
 				}
 			}
 			
-			printArray(array);
+			//printArray(array);
 		}
 		System.out.println("Move: " + countMove);
 		System.out.println("Compare: " + countCompare);
@@ -86,6 +86,6 @@ public class RadixSort
 		int[] arr = ag.generateArray(100, 1000);
 		ob.printArray(arr);
 		ob.iterativeRadixSort(arr, 0, arr.length-1);
-		System.out.println();
+		ob.printArray(arr);
 	}
 }

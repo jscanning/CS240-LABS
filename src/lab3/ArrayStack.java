@@ -27,7 +27,7 @@ public final class ArrayStack<T> implements StackInterface<T>
 		checkCapacity(initCapacity);
 		
 		@SuppressWarnings("unchecked")
-		T[] tempStack = (T[])new Object[initCapacity];
+		T[] tempStack = (T[])new Integer[initCapacity];
 		stack = tempStack;
 		topIndex = -1;
 		initialized = true;
@@ -38,14 +38,14 @@ public final class ArrayStack<T> implements StackInterface<T>
 	{
 		ensureCapacity(); 
 		checkInitialization();
-		stack[topIndex + 1] = newEntry;
+		stack[topIndex+1] = newEntry;
 		topIndex++;
 	}
 	
 	// multi-push method for pushing several copies of the same entry onto the stack.
 	public void push(T newEntry, int numOfCopies)
 	{
-		for(int i = numOfCopies; i > 0; i--)
+		for(int i = 1; i <= numOfCopies; i++)
 			push(newEntry);
 	}
 
@@ -60,14 +60,13 @@ public final class ArrayStack<T> implements StackInterface<T>
 			T top = stack[topIndex];
 			stack[topIndex] = null;
 			topIndex--;
-			ensureCapacity();
 			return top;
 		}
 	}
 
 	private void ensureCapacity() 
 	{
-		if(topIndex == stack.length - 1)
+		if(topIndex >= stack.length - 1)
 		{
 			int newLength = 2*stack.length;
 			checkCapacity(newLength);
@@ -120,11 +119,12 @@ public final class ArrayStack<T> implements StackInterface<T>
 	
 	public int getLength()
 	{
-		return topIndex + 2;
+		return topIndex + 1;
 	}
 	
 	public T[] toArray()
 	{
-		return stack;
+		T[] tempStack = stack;
+		return tempStack;
 	}
 } // end class ArrayStack

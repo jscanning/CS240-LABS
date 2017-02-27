@@ -12,7 +12,7 @@ public class CircularLinkedQueue<T> implements QueueInterface<T>
 	private Node backNode;
 	private Node freeNode;
 	private int size;
-	private static final int MAX_SIZE = 10;
+	private static final int MAX_SIZE = 50;
 	
 	public CircularLinkedQueue()
 	{

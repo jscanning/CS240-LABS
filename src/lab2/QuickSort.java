@@ -89,9 +89,10 @@ public class QuickSort
 	{
 		QuickSort ob = new QuickSort();
 		arrayGenerator ag = new arrayGenerator();
-		int[] arr = ag.generateArray(10, 1000);
+		//int[] arr = ag.generateArray(30, 30);
+		int[] arr = new int[]{-1, 4, 0,1,-2};
 		ob.printArray(arr);
-		ob.iterativeQuickSort(arr, 0, arr.length-1);
+		ob.recursiveQuickSort(arr, 0, arr.length-1);
 		ob.printArray(arr);
 	}
 }

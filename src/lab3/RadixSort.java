@@ -45,10 +45,10 @@ public class RadixSort
 				}
 			}
 			
-			printArray(integers);
+	//		printArray(integers);
 		}
-		System.out.println("Move: " + countMove);
-		System.out.println("Compare: " + countCompare);
+	//	System.out.println("Move: " + countMove);
+	//	System.out.println("Compare: " + countCompare);
 	}
 	
 	public void recursiveRadixSort(int[] array, int first, int last)
@@ -69,8 +69,10 @@ public class RadixSort
 	{
 		int max = 0;
 		for(int i = 0; i < integers.length; i++)
+		{
 			if(integers[i] > max)
 				max = integers[i];
+		}
 		return max;
 	}
 
@@ -81,13 +83,13 @@ public class RadixSort
 		System.out.println();
 	}
 	
-	/**public static void main(String args[])
+	public static void main(String args[])
 	{
 		RadixSort ob = new RadixSort();
-		arrayGenerator ag = new arrayGenerator();
-		int[] arr = ag.generateArray(100, 1000);
+		Integer[] arr = new Integer[]{5, 300, 302, 309, 301, 304, 303, 1};
 		ob.printArray(arr);
 		ob.iterativeRadixSort(arr, 0, arr.length-1);
+		ob.printArray(arr);
 		System.out.println();
-	}*/
+	}
 }
