@@ -1,6 +1,5 @@
 package lab3;
 
-import java.sql.Array;
 import java.util.EmptyStackException;
 import java.util.Random;
 
@@ -85,6 +84,7 @@ public class Inventory
 			System.out.println("Shipment complete");
 		}
 		CircularLinkedQueue<Integer> customers;
+		System.out.println("Customers Arrive");
 		for(int i = 0; i < 10; i++)
 		{
 			customers = customerArrival(rand.nextInt(100)+1, 50);
@@ -96,7 +96,7 @@ public class Inventory
 		sortStock(stock);
 		removeExpiredStock(stock);
 		currentDate++;
-		/**System.out.println("Customers Lost: " + lostCustomerDay);
+		System.out.println("Customers Lost: " + lostCustomerDay);
 		System.out.println("Total Sold: "+ (countItemOne+countItemTwo+countItemThree+countItemFour+countItemFive+countItemSix));
 		System.out.println("Burgers sold: " + countItemOne);
 		System.out.println("Cheeseburgers sold: " + countItemTwo);
@@ -107,7 +107,6 @@ public class Inventory
 		System.out.println("Wasted Food Totals: Cheese: " + wasteCheese + " Buns: " + wasteBun + " Patties: " + wastePatty);
 		System.out.println("Lettuce: " + wasteLettuce + " Tomato: " + wasteTomato + " Onion: " + wasteOnion);
 		System.out.println("Total Customers Lost: " + lostCustomerTotal);
-		*/
 	}
 	
 	public CircularLinkedQueue<Integer> customerArrival(int numberOfCustomers, int limit)
@@ -265,9 +264,8 @@ public class Inventory
 				Integer[] tempArray = new Integer[stock[i].getLength()];
 				for(int x = 0; x < tempArray.length; x++)
 					tempArray[x] = stock[i].pop();
-				sorter.printArray(tempArray);
+				//sorter.printArray(tempArray);
 				sorter.recursiveQuickSort(tempArray, 0, tempArray.length - 1);
-			//	System.out.println(tempArray);
 				for(int j = 0; j < tempArray.length; j++)
 					stock[i].push(tempArray[j]);
 			}
@@ -305,12 +303,12 @@ public class Inventory
 			try{
 				while((stock[i].peek().intValue() < currentDate) && !stock[i].isEmpty())
 				{
-					System.out.println("Removing Expired Product");
+					//System.out.println("Removing Expired Product");
 					stock[i].pop();
 					incrementWaste(i);
 				}
 			}catch(EmptyStackException e){
-				System.out.println("Empty Stack");
+				//System.out.println("Empty Stack");
 			}
 		}
 	}
@@ -321,10 +319,10 @@ public class Inventory
 		@SuppressWarnings("unchecked")
 		ArrayStack<Integer>[] stock = new ArrayStack[6];
 		inv.initialize(stock);
-		//while(inv.currentDate <= 330){
+		while(inv.currentDate <= 330){
 			inv.businessDay(stock);
 			System.out.println();
-		//}
+		}
 	}
 	
 }
